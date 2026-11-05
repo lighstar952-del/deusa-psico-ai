@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: deusa-psico-ai
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 1 --threads 4 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: PAINEL_SENHA
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET_JSON
+        sync: false
+      - key: REDIRECT_URI
+        value: https://deusa-psico-ai.onrender.com/oauth2callback
